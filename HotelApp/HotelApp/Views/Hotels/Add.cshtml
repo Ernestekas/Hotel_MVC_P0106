@@ -1,0 +1,23 @@
+﻿@model HotelApp.Dtos.Hotel.CreateHotel
+
+<h2>Add new Hotel:</h2>
+@using(Html.BeginForm("Add", "Hotels", FormMethod.Post))
+{
+    <div>
+        <table class="table table-bordered">
+            <tr class="table-primary">
+                <th>Name</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Total rooms</th>
+            </tr>
+            <tr>
+                <td>@Html.TextBoxFor(m => m.Name)</td>
+                <td>@Html.TextBoxFor(m => m.City)</td>
+                <td>@Html.TextBoxFor(m => m.Address)</td>
+                <td>@Html.TextBoxFor(m => m.TotalRooms, new {@type="number", min = "0" })</td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" class="btn btn-warning" />
+}

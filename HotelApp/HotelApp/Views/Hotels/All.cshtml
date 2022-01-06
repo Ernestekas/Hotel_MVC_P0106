@@ -1,0 +1,17 @@
+﻿@model HotelApp.Dtos.DisplayHotels
+
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>Hotel</th>
+        <th>Action</th>
+    </tr>
+    @for (int i = 0; i < Model.HotelsNames.Count; i++)
+    {
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@Model.HotelsNames[i]</td>
+            <td>@Html.ActionLink("Update", "Update", "Hotels", new {hotelId = Model.HotelsIds[i] })</td>
+        </tr>
+    }
+</table>
