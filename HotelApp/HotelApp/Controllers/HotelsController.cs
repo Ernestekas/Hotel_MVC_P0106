@@ -1,5 +1,6 @@
 ﻿using HotelApp.Dtos;
 using HotelApp.Dtos.Hotel;
+using HotelApp.Repositories;
 using HotelApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +21,9 @@ namespace HotelApp.Controllers
 
         public IActionResult All()
         {
+            JsonReader test = new JsonReader();
+            test.LithuanianCities();
+
             DisplayHotels viewModel = _hotelsService.GetAll();
             return View(viewModel);
         }
@@ -64,6 +68,12 @@ namespace HotelApp.Controllers
         {
             _hotelsService.Remove(hotelId);
             return RedirectToAction(nameof(All));
+        }
+
+        public IActionResult Hotel(int hotelId)
+        {
+            // Implement more functionality when more details will be added.
+            return View(hotelId);
         }
     }
 }
