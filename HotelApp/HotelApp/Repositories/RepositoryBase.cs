@@ -1,4 +1,5 @@
 ﻿using HotelApp.Data;
+using HotelApp.Models.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotelApp.Repositories
 {
-    public abstract class RepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> where T : Entity
     {
         protected DataContext _context;
         private DbSet<T> _dbSet;
@@ -24,9 +25,28 @@ namespace HotelApp.Repositories
             return _dbSet.ToList();
         }
 
+        public T GetById(int entityId)
+        {
+            return _dbSet.FirstOrDefault(x => x.Id == entityId);
+        }
+
         public void Create(T entity)
         {
             _context.Add(entity);
+            _context.SaveChanges();
+        }
+
+        public void Update(T entity)
+        {
+            _context.Update(entity);
+            _context.SaveChanges();
+        }
+
+        public void Remove(int entityId)
+        {
+            var entity = GetById(entityId);
+
+            _context.Remove(entity);
             _context.SaveChanges();
         }
     }

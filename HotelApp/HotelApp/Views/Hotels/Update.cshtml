@@ -1,7 +1,7 @@
 ﻿@model HotelApp.Dtos.Hotel.HotelViewModel
 
 <h2>Add new Hotel:</h2>
-@using(Html.BeginForm("Add", "Hotels", FormMethod.Post))
+@using(Html.BeginForm("Update", "Hotels", FormMethod.Post))
 {
     <div>
         <table class="table table-bordered">
@@ -20,5 +20,6 @@
         </table>
     </div>
     <input type="submit" class="btn btn-warning" />
+    @Html.HiddenFor(m => m.Id, new {@readonly="readonly"})
 }
 @Html.ValidationSummary()

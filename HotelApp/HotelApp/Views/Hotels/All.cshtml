@@ -11,7 +11,10 @@
         <tr>
             <td>@(i + 1)</td>
             <td>@Model.HotelsNames[i]</td>
-            <td>@Html.ActionLink("Update", "Update", "Hotels", new {hotelId = Model.HotelsIds[i] })</td>
+            <td>
+                @Html.ActionLink("Update", "Update", "Hotels", new { hotelId = Model.HotelsIds[i] }) |
+                @Html.ActionLink("Delete", "Delete", "Hotels", new { hotelId = Model.HotelsIds[i] })
+            </td>
         </tr>
     }
 </table>

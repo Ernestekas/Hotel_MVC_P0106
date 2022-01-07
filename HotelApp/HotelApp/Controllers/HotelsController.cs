@@ -26,14 +26,43 @@ namespace HotelApp.Controllers
 
         public IActionResult Add()
         {
-            CreateHotel newHotel = new CreateHotel();
+            HotelViewModel newHotel = new HotelViewModel();
             return View(newHotel);
         }
 
         [HttpPost]
-        public IActionResult Add(CreateHotel viewModel)
+        public IActionResult Add(HotelViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             _hotelsService.Add(viewModel);
+            return RedirectToAction(nameof(All));
+        }
+
+        public IActionResult Update(int hotelId)
+        {
+            HotelViewModel viewModel = _hotelsService.GetById(hotelId);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Update(HotelViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            _hotelsService.Update(viewModel);
+            return RedirectToAction(nameof(All));
+        }
+
+        public IActionResult Delete(int hotelId)
+        {
+            _hotelsService.Remove(hotelId);
             return RedirectToAction(nameof(All));
         }
     }

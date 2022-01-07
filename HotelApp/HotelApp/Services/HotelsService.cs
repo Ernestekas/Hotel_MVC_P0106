@@ -32,7 +32,23 @@ namespace HotelApp.Services
             return result;
         }
 
-        public void Add(CreateHotel viewModel)
+        public HotelViewModel GetById(int hotelId)
+        {
+            Hotel hotel = _hotelsRepository.GetById(hotelId);
+            HotelViewModel result = new HotelViewModel()
+            {
+                Id = hotel.Id,
+                Name = hotel.Name,
+                City = hotel.City,
+                Address = hotel.Address,
+                TotalRooms = hotel.TotalRooms
+            };
+            
+            return result;
+            
+        }
+
+        public void Add(HotelViewModel viewModel)
         {
             Hotel hotel = new Hotel()
             {
@@ -43,6 +59,22 @@ namespace HotelApp.Services
             };
 
             _hotelsRepository.Create(hotel);
+        }
+
+        public void Update(HotelViewModel viewModel)
+        {
+            Hotel hotel = _hotelsRepository.GetById(viewModel.Id);
+            hotel.Name = viewModel.Name;
+            hotel.City = viewModel.City;
+            hotel.Address = viewModel.Address;
+            hotel.TotalRooms = viewModel.TotalRooms;
+
+            _hotelsRepository.Update(hotel);
+        }
+
+        public void Remove(int hotelId)
+        {
+            _hotelsRepository.Remove(hotelId);
         }
     }
 }
