@@ -1,0 +1,23 @@
+﻿@model HotelApp.Dtos.Location.CountryViewModel
+
+@using (Html.BeginForm("AddCountry", "Locations", FormMethod.Post))
+{
+    <table style="width: 300px">
+        <tr>
+            <th>Country name</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(x => x.Name)</td>
+            <td><input type="submit" class="btn btn-success" value="Submit"/></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Cities</th>
+        </tr>
+        <tr>
+            <td id="main"><input type="text" value="" placeholder="Enter city name" name="city0" onchange=""/></td>
+        </tr>
+    </table>
+}

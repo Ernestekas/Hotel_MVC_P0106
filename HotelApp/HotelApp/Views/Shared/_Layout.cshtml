@@ -16,14 +16,22 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <div class="dropdown">
-                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+                    <div class="dropdown mr-2">
+                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hotels
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Hotels" asp-action="All">All Hotels</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Hotels" asp-action="Add">Add Hotel</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Locations
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Locations" asp-action="Manage">Manager</a>
                         </div>
                     </div>
                 </div>

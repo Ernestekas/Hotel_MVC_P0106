@@ -1,4 +1,5 @@
 ﻿using HotelApp.Models.Generic;
+using HotelApp.Models.Location;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,16 +9,10 @@ using System.Threading.Tasks;
 
 namespace HotelApp.Models
 {
-    public class Hotel : Entity
+    public class Hotel : NamedEntity
     {
-        [Required]
-        [MinLength(2, ErrorMessage = "Hotel name is too short.")]
-        public string Name { get; set; }
-        [Required]
-        [MinLength(2, ErrorMessage = "City name is too short.")]
-        public string City { get; set; }
-        [Required]
-        [MinLength(1, ErrorMessage = "Address ir required.")]
+        public int CityId { get; set; }
+        public City City{ get; set; }
         public string Address { get; set; }
         public int TotalRooms { get; set; }
         public bool UpdateInProgress { get; set; }

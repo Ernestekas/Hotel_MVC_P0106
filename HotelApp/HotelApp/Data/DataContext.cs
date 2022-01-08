@@ -1,4 +1,5 @@
 ﻿using HotelApp.Models;
+using HotelApp.Models.Location;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,22 @@ namespace HotelApp.Data
     public class DataContext : DbContext
     {
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Hotel>().Property<bool>("IsDeleted");
             modelBuilder.Entity<Hotel>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+
+            modelBuilder.Entity<Country>().Property<bool>("IsDeleted");
+            modelBuilder.Entity<Country>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+
+            modelBuilder.Entity<City>().Property<bool>("IsDeleted");
+            modelBuilder.Entity<City>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
         }
 
         public override int SaveChanges()

@@ -1,5 +1,6 @@
 using HotelApp.Data;
 using HotelApp.Repositories;
+using HotelApp.Repositories.Locations;
 using HotelApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,10 @@ namespace HotelApp
 
             services.AddTransient<HotelsService>();
             services.AddTransient<HotelsRepository>();
+
+            services.AddTransient<LocationsService>();
+            services.AddTransient<CountriesRepository>();
+            services.AddTransient<CitiesRepository>();
 
             services.AddControllersWithViews();
         }

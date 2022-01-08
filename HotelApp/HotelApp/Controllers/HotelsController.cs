@@ -21,9 +21,6 @@ namespace HotelApp.Controllers
 
         public IActionResult All()
         {
-            JsonReader test = new JsonReader();
-            test.LithuanianCities();
-
             DisplayHotels viewModel = _hotelsService.GetAll();
             return View(viewModel);
         }

@@ -11,6 +11,5 @@ namespace HotelApp.Repositories
     public class HotelsRepository : RepositoryBase<Hotel>
     {
         public HotelsRepository(DataContext context) : base(context) { }
-
     }
 }

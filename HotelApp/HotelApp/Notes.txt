@@ -1,0 +1,8 @@
+﻿TODO:
+
+1. Locations.
+- Add new country.
+- Update country.
+- Delete country.
+			
+		
