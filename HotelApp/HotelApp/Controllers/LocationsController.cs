@@ -23,5 +23,12 @@ namespace HotelApp.Controllers
             CountryViewModel countryViewModel = new CountryViewModel();
             return View(countryViewModel);
         }
+
+        [HttpPost]
+        public IActionResult AddCountry(CountryViewModel viewModel)
+        {
+            
+            return RedirectToAction(nameof(Manage));
+        }
     }
 }

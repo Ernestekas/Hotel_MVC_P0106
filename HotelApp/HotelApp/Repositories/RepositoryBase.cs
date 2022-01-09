@@ -30,10 +30,11 @@ namespace HotelApp.Repositories
             return _dbSet.FirstOrDefault(x => x.Id == entityId);
         }
 
-        public void Create(T entity)
+        public int Create(T entity)
         {
             _context.Add(entity);
             _context.SaveChanges();
+            return entity.Id;
         }
 
         public void Update(T entity)

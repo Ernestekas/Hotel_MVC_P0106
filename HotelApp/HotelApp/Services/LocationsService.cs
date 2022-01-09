@@ -29,5 +29,26 @@ namespace HotelApp.Services
                 CountriesNames = countries.Select(x => x.Name).ToList()
             };
         }
+
+        public void Create(CountryViewModel viewModel)
+        {
+            List<City> newCities = new List<City>();
+            Country newCountry = new Country()
+            {
+                Name = viewModel.Name
+            };
+
+            int countryId = _countriesRepository.Create(newCountry);
+
+            foreach (var cityName in viewModel.CitiesNames)
+            {
+                City newCity = new City()
+                {
+                    Name = cityName,
+                    CountryId = countryId
+                };
+            }
+            
+        }
     }
 }

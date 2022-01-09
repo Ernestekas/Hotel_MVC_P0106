@@ -1,5 +1,8 @@
 ﻿@model HotelApp.Dtos.Location.CountryViewModel
 
+<script src="~/js/fnOnChange.js"></script>
+<script src="~/js/submitNewCountryWithCities.js"></script>
+
 @using (Html.BeginForm("AddCountry", "Locations", FormMethod.Post))
 {
     <table style="width: 300px">
@@ -8,16 +11,22 @@
             <th></th>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(x => x.Name)</td>
-            <td><input type="submit" class="btn btn-success" value="Submit"/></td>
+            <td><input id="countryName" type="text" value="" placeholder="Enter country name"/></td>
+            <td><input type="button" class="btn btn-success" value="Submit" onclick="submitForm()"/></td>
         </tr>
     </table>
-    <table>
-        <tr>
-            <th>Cities</th>
-        </tr>
-        <tr>
-            <td id="main"><input type="text" value="" placeholder="Enter city name" name="city0" onchange=""/></td>
-        </tr>
+    <table id="cities">
+        <thead>
+            <tr>
+                <th>Cities</th>
+            </tr>
+        </thead>
+        <tbody id="cities">
+            <tr>
+                <td><input id="main" type="text" value="" placeholder="Enter city name" name="city0" onkeyup="changed(this.id, event)"/></td>
+            </tr>
+        </tbody>
     </table>
+    @Html.ValidationSummary()
 }
+
