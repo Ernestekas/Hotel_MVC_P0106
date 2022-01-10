@@ -29,5 +29,24 @@ namespace HotelApp.Controllers
         {
             _locationsService.Create(viewModel);
         }
+
+        public IActionResult DeleteCountry(int countryId)
+        {
+            _locationsService.DeleteCountry(countryId);
+            return RedirectToAction(nameof(Manage));
+        }
+
+        public IActionResult UpdateCountry(int countryId)
+        {
+            CountryViewModel viewModel = _locationsService.GetUpdateViewModel(countryId);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCountry(CountryViewModel viewModel)
+        {
+
+            return View(viewModel);
+        }
     }
 }

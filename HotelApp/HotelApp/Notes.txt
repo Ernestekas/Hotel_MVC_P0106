@@ -1,8 +1,18 @@
-﻿TODO:
+﻿TODO - Optimization phase:
 
-1. Locations.
-- Add new country.
-- Update country.
-- Delete country.
-			
-		
+1. Add new country view.
+	- Adding new country. Create validation in javascript to prevent user from entering existing countries names.
+
+2. Delete existing country.
+	- Assign hotels to cities. 
+	- Delete city:
+		- if there is no hotels in it.
+	- Delete country:
+		- if no cities has hotels.
+		- option to delete only cities without hotels.
+
+TODO - short term tasks:
+1. Update locations.
+	- Update country name.
+	- Update existing city names without possibility to add new cities.
+	- Add new cities without possibility to update existing cities names.

@@ -22,36 +22,82 @@ namespace HotelApp.Services
 
         public LocationsModel GetAll()
         {
-            List<Country> countries = _countriesRepository.GetAll();
-            return new LocationsModel() 
-            { 
-                CountriesIds = countries.Select(x => x.Id).ToList(), 
-                CountriesNames = countries.Select(x => x.Name).ToList()
-            };
+            LocationsModel result = new LocationsModel();
+            List<Country> countries = _countriesRepository.GetAllIncluded();
+
+            result.CountriesIds = countries.Select(x => x.Id).ToList();
+            result.CountriesNames = countries.Select(x => x.Name).ToList();
+
+            foreach (var country in countries)
+            {
+                result.CountriesCitiesCount.Add(country.Cities.Count);
+            }
+
+            return result;
         }
 
         public void Create(CountryViewModel viewModel)
         {
             List<City> newCities = new List<City>();
+            
             Country newCountry = new Country()
             {
                 Name = viewModel.Name
             };
-
+            
             int countryId = _countriesRepository.Create(newCountry);
 
             foreach (var cityName in viewModel.CitiesNames)
             {
-                City newCity = new City()
+                if(!string.IsNullOrWhiteSpace(cityName))
                 {
-                    Name = cityName,
-                    CountryId = countryId
-                };
+                    City newCity = new City()
+                    {
+                        Name = cityName,
+                        CountryId = countryId
+                    };
 
-                newCities.Add(newCity);
+                    newCities.Add(newCity);
+                }
             }
             
             _citiesRepository.CreateRange(newCities);
+        }
+
+        public void DeleteCountry(int countryId)
+        {
+            Country selected = _countriesRepository.GetByIdIncluded(countryId);
+            _citiesRepository.RemoveRange(selected.Cities);
+            _countriesRepository.Remove(selected.Id);
+        }
+
+        public CountryViewModel GetUpdateViewModel(int countryId)
+        {
+            Country selected = _countriesRepository.GetByIdIncluded(countryId);
+            CountryViewModel result = new CountryViewModel()
+            {
+                Id = selected.Id,
+                Name = selected.Name,
+                CitiesIds = selected.Cities.Select(ct => ct.Id).ToList(),
+                CitiesNames = selected.Cities.Select(ct => ct.Name).ToArray()
+            };
+
+            return result;
+        }
+
+        public bool UpdateCountry(CountryViewModel viewModel)
+        {
+            bool success = false;
+            Country selected = _countriesRepository.GetByIdIncluded(viewModel.Id);
+
+            return success;
+        }
+
+        private bool UpdateCountryName(Country country, string name)
+        {
+            bool success = false;
+
+            return success;
         }
     }
 }

@@ -4,7 +4,9 @@
 <table class="table table-bordered" style="width: 75%">
     <tr class="btn-info">
         <th style="width: 7%; text-align:center">#</th>
-        <th>Country</th>
+        <th style="width: 25%">Country</th>
+        <th style="width: 15%; text-align:center"># of Cities</th>
+        <th style="width: 15%; text-align:center"># of Hotels</th>
         <th style="width: 20%">Action</th>
     </tr>
 @for(int i = 0; i < @Model.CountriesIds.Count; i++)
@@ -12,10 +14,14 @@
     <tr>
         <td style="width: 5%; text-align: center">@(i + 1)</td>
         <td>@Model.CountriesNames[i]</td>
+        <td style="text-align:center">@Model.CountriesCitiesCount[i]</td>
+        <td style="text-align:center"><i>N/A</i></td>
         <td>
-            @Html.ActionLink("Update", "UpdateCountry", "Locations", @Model.CountriesIds[i]) |
-            @Html.ActionLink("Delete", "DeleteCountry", "Locations", @Model.CountriesIds[i])
+            @Html.ActionLink("Update", "UpdateCountry", "Locations", new{countryId = @Model.CountriesIds[i]}) |
+            @Html.ActionLink("Delete", "DeleteCountry", "Locations", new{countryId = @Model.CountriesIds[i]})
         </td>
     </tr>
 }
 </table>
+
+<div id="errorContainer"></div>

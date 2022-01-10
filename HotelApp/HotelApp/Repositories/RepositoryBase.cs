@@ -56,5 +56,11 @@ namespace HotelApp.Repositories
             _context.Remove(entity);
             _context.SaveChanges();
         }
+
+        public void RemoveRange(List<T> entities)
+        {
+            _context.RemoveRange(entities);
+            _context.SaveChanges();
+        }
     }
 }

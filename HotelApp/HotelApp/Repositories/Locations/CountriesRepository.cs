@@ -14,5 +14,10 @@ namespace HotelApp.Repositories.Locations
         {
             return _context.Countries.Include(c => c.Cities).ToList();
         }
+
+        public Country GetByIdIncluded(int id)
+        {
+            return _context.Countries.Include(c => c.Cities).Where(x => x.Id == id).FirstOrDefault();
+        }
     }
 }

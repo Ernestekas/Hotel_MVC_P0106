@@ -5,14 +5,16 @@
 
 @using (Html.BeginForm("AddCountry", "Locations", FormMethod.Post))
 {
-    <table style="width: 300px">
+    <table style="width: 50%">
         <tr>
-            <th>Country name</th>
+            <th style="width: 40%">Country name</th>
+            <th></th>
             <th></th>
         </tr>
         <tr>
             <td><input id="countryName" type="text" value="" placeholder="Enter country name"/></td>
             <td><input type="button" class="btn btn-success" value="Submit" onclick="submitForm()"/></td>
+            <td id="errorContainer"></td>
         </tr>
     </table>
     <table id="cities">

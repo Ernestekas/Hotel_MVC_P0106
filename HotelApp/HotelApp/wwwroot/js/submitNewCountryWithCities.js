@@ -17,6 +17,16 @@
     model.Name = name;
     model.CitiesNames = allCities;
 
+    if (model.Name.length < 4) {
+        let errorMsg = document.createElement("p");
+        let main = document.getElementById("errorContainer");
+        errorMsg.innerHTML = "Country name is too short.";
+        errorMsg.setAttribute("style", "color: red");
+        main.appendChild(errorMsg);
+        
+        return;
+    }
+
     $.ajax({
         type: 'POST',
         data: model,

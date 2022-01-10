@@ -1,0 +1,36 @@
+﻿@model HotelApp.Dtos.Location.CountryViewModel
+
+@using (Html.BeginForm("UpdateCountry", "Locations", FormMethod.Post))
+{
+    <table class="mb-2">
+        <tr>
+            <th>Country:</th>
+            <td>@Html.TextBoxFor(c => c.Name)</td>
+            <td>
+                <input type="submit" value="Update" />
+                <input type="reset" value="Reset" />
+            </td>
+        </tr>
+    </table>
+    <table class="table table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>#</th>
+                <th>Cities</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i = 0; i < Model.CitiesNames.Length; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Html.TextBoxFor(m => m.CitiesNames[i])</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div style="display: none">
+        @Html.EditorFor(m => m.Id)
+        @Html.EditorFor(m => m.CitiesIds)
+    </div>
+}
