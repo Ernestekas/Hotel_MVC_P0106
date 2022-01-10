@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelApp.Models.Location;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,5 +21,6 @@ namespace HotelApp.Dtos.Hotel
         [MinLength(1, ErrorMessage = "Address ir required.")]
         public string Address { get; set; }
         public int TotalRooms { get; set; }
+        public List<Country> Countries { get; set; }
     }
 }

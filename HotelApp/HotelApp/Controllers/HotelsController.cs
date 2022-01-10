@@ -13,10 +13,12 @@ namespace HotelApp.Controllers
     public class HotelsController : Controller
     {
         private readonly HotelsService _hotelsService;
+        private readonly LocationsService _locationsService;
 
-        public HotelsController(HotelsService hotelsService)
+        public HotelsController(HotelsService hotelsService, LocationsService locationsService)
         {
             _hotelsService = hotelsService;
+            _locationsService = locationsService;
         }
 
         public IActionResult All()
@@ -27,7 +29,11 @@ namespace HotelApp.Controllers
 
         public IActionResult Add()
         {
-            HotelViewModel newHotel = new HotelViewModel();
+            HotelViewModel newHotel = new HotelViewModel()
+            {
+                Countries = _locationsService.GetAllRaw()
+            };
+
             return View(newHotel);
         }
 

@@ -36,6 +36,11 @@ namespace HotelApp.Services
             return result;
         }
 
+        public List<Country> GetAllRaw()
+        {
+            return _countriesRepository.GetAllIncluded();
+        }
+
         public void Create(CountryViewModel viewModel)
         {
             List<City> newCities = new List<City>();
@@ -85,19 +90,30 @@ namespace HotelApp.Services
             return result;
         }
 
-        public bool UpdateCountry(CountryViewModel viewModel)
+        public void UpdateCountry(CountryViewModel viewModel)
         {
-            bool success = false;
             Country selected = _countriesRepository.GetByIdIncluded(viewModel.Id);
 
-            return success;
+            selected.Name = viewModel.Name;
+
+            for (int i = 0; i < viewModel.CitiesNames.Length; i++)
+            {
+                selected.Cities[i].Name = viewModel.CitiesNames[i];
+            }
+
+            _countriesRepository.Update(selected);
         }
 
-        private bool UpdateCountryName(Country country, string name)
+        public int DeleteCity(int cityId)
         {
-            bool success = false;
+            int redirectToCountryId;
+            City city = _citiesRepository.GetById(cityId);
 
-            return success;
+            redirectToCountryId = city.CountryId;
+            
+            _citiesRepository.Remove(cityId);
+
+            return redirectToCountryId;
         }
     }
 }

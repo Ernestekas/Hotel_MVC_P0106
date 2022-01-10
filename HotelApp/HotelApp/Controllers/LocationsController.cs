@@ -45,8 +45,17 @@ namespace HotelApp.Controllers
         [HttpPost]
         public IActionResult UpdateCountry(CountryViewModel viewModel)
         {
-
-            return View(viewModel);
+            _locationsService.UpdateCountry(viewModel);
+            return RedirectToAction(nameof(Manage));
         }
+
+        public IActionResult DeleteCity(int cityId)
+        {
+            int redirectId = _locationsService.DeleteCity(cityId);
+
+            return RedirectToAction(nameof(UpdateCountry), new {countryId = redirectId});
+        }
+
+
     }
 }
