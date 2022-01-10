@@ -25,10 +25,9 @@ namespace HotelApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCountry(CountryViewModel viewModel)
+        public void AddCountry(CountryViewModel viewModel)
         {
-            
-            return RedirectToAction(nameof(Manage));
+            _locationsService.Create(viewModel);
         }
     }
 }

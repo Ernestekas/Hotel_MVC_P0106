@@ -47,8 +47,11 @@ namespace HotelApp.Services
                     Name = cityName,
                     CountryId = countryId
                 };
+
+                newCities.Add(newCity);
             }
             
+            _citiesRepository.CreateRange(newCities);
         }
     }
 }

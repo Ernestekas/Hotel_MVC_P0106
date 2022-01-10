@@ -20,6 +20,11 @@
     $.ajax({
         type: 'POST',
         data: model,
-        url: '/Locations/AddCountry'
+        url: '/Locations/AddCountry',
+        success: function () {
+            window.location.href = "/Locations/Manage"
+        }
     });
+
+    
 }

@@ -1,16 +1,16 @@
 ﻿@model HotelApp.Dtos.Location.LocationsModel
 
 @Html.ActionLink("Add new country", "AddCountry", "Locations", null, new {@class = "btn btn-warning mb-1"})
-<table class="table table-bordered">
+<table class="table table-bordered" style="width: 75%">
     <tr class="btn-info">
-        <th>#</th>
+        <th style="width: 7%; text-align:center">#</th>
         <th>Country</th>
-        <th>Action</th>
+        <th style="width: 20%">Action</th>
     </tr>
 @for(int i = 0; i < @Model.CountriesIds.Count; i++)
 {
     <tr>
-        <td>@(i + 1)</td>
+        <td style="width: 5%; text-align: center">@(i + 1)</td>
         <td>@Model.CountriesNames[i]</td>
         <td>
             @Html.ActionLink("Update", "UpdateCountry", "Locations", @Model.CountriesIds[i]) |

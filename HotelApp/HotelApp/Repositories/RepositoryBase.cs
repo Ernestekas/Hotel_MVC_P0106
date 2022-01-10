@@ -37,6 +37,12 @@ namespace HotelApp.Repositories
             return entity.Id;
         }
 
+        public void CreateRange(List<T> entities)
+        {
+            _context.AddRange(entities);
+            _context.SaveChanges();
+        }
+
         public void Update(T entity)
         {
             _context.Update(entity);
