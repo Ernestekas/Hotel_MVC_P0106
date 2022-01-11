@@ -31,7 +31,7 @@ namespace HotelApp.Controllers
         {
             HotelViewModel newHotel = new HotelViewModel()
             {
-                Countries = _locationsService.GetAllRaw()
+                AllCities = _locationsService.GetAllCities()
             };
 
             return View(newHotel);

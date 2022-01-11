@@ -15,12 +15,10 @@ namespace HotelApp.Dtos.Hotel
         [MinLength(2, ErrorMessage = "Hotel name is too short.")]
         public string Name { get; set; }
         [Required]
-        [MinLength(2, ErrorMessage = "City name is too short.")]
-        public string City { get; set; }
-        [Required]
         [MinLength(1, ErrorMessage = "Address ir required.")]
         public string Address { get; set; }
         public int TotalRooms { get; set; }
-        public List<Country> Countries { get; set; }
+        public int SelectedCityId { get; set; }
+        public List<City> AllCities { get; set; }
     }
 }

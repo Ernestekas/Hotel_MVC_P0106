@@ -1,6 +1,9 @@
-﻿using HotelApp.Dtos.Location;
+﻿using HotelApp.Dtos.Hotel;
+using HotelApp.Dtos.Location;
 using HotelApp.Models.Location;
 using HotelApp.Repositories.Locations;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +39,9 @@ namespace HotelApp.Services
             return result;
         }
 
-        public List<Country> GetAllRaw()
+        public List<City> GetAllCities()
         {
-            return _countriesRepository.GetAllIncluded();
+            return _citiesRepository.GetAll();
         }
 
         public void Create(CountryViewModel viewModel)

@@ -39,7 +39,6 @@ namespace HotelApp.Services
             {
                 Id = hotel.Id,
                 Name = hotel.Name,
-                City = hotel.City.Name,
                 Address = hotel.Address,
                 TotalRooms = hotel.TotalRooms
             };
@@ -54,7 +53,8 @@ namespace HotelApp.Services
             {
                 Name = viewModel.Name,
                 Address = viewModel.Address,
-                TotalRooms = viewModel.TotalRooms
+                TotalRooms = viewModel.TotalRooms,
+                CityId = viewModel.SelectedCityId
             };
 
             _hotelsRepository.Create(hotel);

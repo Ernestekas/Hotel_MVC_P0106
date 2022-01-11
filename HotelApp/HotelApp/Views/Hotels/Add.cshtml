@@ -7,17 +7,19 @@
         <table class="table table-bordered">
             <tr class="table-primary">
                 <th>Name</th>
-                <th>Country</th>
                 <th>City</th>
                 <th>Address</th>
                 <th>Total rooms</th>
             </tr>
             <tr>
-                <td>@Html.TextBoxFor(m => m.Name)</td>
-                <td></td>
-                <td>@Html.TextBoxFor(m => m.City)</td>
-                <td>@Html.TextBoxFor(m => m.Address)</td>
-                <td>@Html.TextBoxFor(m => m.TotalRooms, new {@type="number", min = "0" })</td>
+                <td class="align-middle">@Html.TextBoxFor(m => m.Name, new{@class = "w-100"})</td>
+                <td>
+                    @Html.DropDownListFor(m => m.SelectedCityId
+                    , new SelectList(@Model.AllCities, "Id", "Name")
+                    , new { @class = "form-control", id="cities"})
+                </td>
+                <td class="align-middle">@Html.TextBoxFor(m => m.Address, new{@class = "w-100"})</td>
+                <td class="align-middle">@Html.TextBoxFor(m => m.TotalRooms, new {@type="number", min = "0", @class="w-100"})</td>
             </tr>
         </table>
     </div>
