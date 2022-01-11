@@ -73,9 +73,8 @@ namespace HotelApp.Controllers
             return RedirectToAction(nameof(All));
         }
 
-        public IActionResult Hotel(int hotelId)
+        public IActionResult HotelManager(int hotelId)
         {
-            // Implement more functionality when more details will be added.
             return View(hotelId);
         }
     }

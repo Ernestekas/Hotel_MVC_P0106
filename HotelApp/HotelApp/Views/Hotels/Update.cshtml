@@ -13,7 +13,9 @@
             </tr>
             <tr>
                 <td>@Html.TextBoxFor(m => m.Name)</td>
-                <td></td>
+                <td>@Html.DropDownListFor(m => m.SelectedCityId
+                    , new SelectList(@Model.AllCities, "Id", "Name")
+                    , new { @class = "form-control", id="cities", value=Model.SelectedCityId})</td>
                 <td>@Html.TextBoxFor(m => m.Address)</td>
                 <td>@Html.TextBoxFor(m => m.TotalRooms, new {@type="number", min = "0" })</td>
             </tr>

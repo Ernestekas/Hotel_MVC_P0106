@@ -16,3 +16,5 @@ TODO - short term tasks:
 	- Update country name.
 	- Update existing city names without possibility to add new cities.
 	- Add new cities without possibility to update existing cities names.
+
+2. Hotel Page.
