@@ -4,6 +4,7 @@ using HotelApp.Models;
 using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using HotelApp.Repositories;
+using HotelApp.Repositories.Hotels;
 using HotelApp.Repositories.Locations;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,15 @@ namespace HotelApp.Services
     {
         private HotelsRepository _hotelsRepository;
         private CitiesRepository _citiesRepository;
+        private FloorsRepository _floorsRepository;
+        private RoomsRepository _roomsRepository;
 
-        public HotelsService(HotelsRepository hotelsRepository, CitiesRepository citiesRepository)
+        public HotelsService(HotelsRepository hotelsRepository, CitiesRepository citiesRepository, FloorsRepository floorRepository, RoomsRepository roomsRepository)
         {
             _hotelsRepository = hotelsRepository;
             _citiesRepository = citiesRepository;
+            _floorsRepository = floorRepository;
+            _roomsRepository = roomsRepository;
         }
 
         public DisplayHotels GetAll()
@@ -39,7 +44,7 @@ namespace HotelApp.Services
 
         public HotelViewModel GetById(int hotelId)
         {
-            Hotel hotel = _hotelsRepository.GetById(hotelId);
+            Hotel hotel = _hotelsRepository.GetByIdIncludeFloors(hotelId);
             HotelViewModel result = new HotelViewModel()
             {
                 Id = hotel.Id,
@@ -47,7 +52,9 @@ namespace HotelApp.Services
                 Address = hotel.Address,
                 TotalRooms = hotel.TotalRooms,
                 AllCities = _citiesRepository.GetAll(),
-                SelectedCityId = hotel.CityId
+                SelectedCityId = hotel.CityId,
+                FloorsCount = hotel.Floors.Count,
+                RoomsPerFloor = hotel.Floors[0].Rooms.Count
             };
             
             return result;
@@ -64,7 +71,11 @@ namespace HotelApp.Services
                 CityId = viewModel.SelectedCityId
             };
 
-            _hotelsRepository.Create(hotel);
+            int hotelId = _hotelsRepository.Create(hotel);
+
+            List<Floor> floors = CreateFloors(viewModel.FloorsCount, hotelId);
+
+            CreateRooms(viewModel.TotalRooms, viewModel.RoomsPerFloor, floors);
         }
 
         public void Update(HotelViewModel viewModel)
@@ -74,7 +85,6 @@ namespace HotelApp.Services
 
             hotel.Name = viewModel.Name;
             hotel.Address = viewModel.Address;
-            hotel.TotalRooms = viewModel.TotalRooms;
             hotel.CityId = viewModel.SelectedCityId;
             hotel.City = selected;
 
@@ -84,6 +94,44 @@ namespace HotelApp.Services
         public void Remove(int hotelId)
         {
             _hotelsRepository.Remove(hotelId);
+        }
+
+        private List<Floor> CreateFloors(int totalFloors, int hotelId)
+        {
+            List<Floor> floors = new List<Floor>();
+            
+            for(int f = 1; f <= totalFloors; f++)
+            {
+                Floor floor = new Floor()
+                {
+                    HotelId = hotelId,
+                    BuildingFloor = f
+                };
+                floors.Add(floor);
+            }
+
+            _floorsRepository.CreateRange(floors);
+            return _floorsRepository.GetAllByHotelId(hotelId);
+        }
+
+        private void CreateRooms(int totalRooms, int roomsPerFloor, List<Floor> hotelFloors)
+        {
+            foreach(Floor floor in hotelFloors)
+            {
+                List<Room> rooms = new List<Room>();
+                for(int r = 1; r <= roomsPerFloor && totalRooms > 0; r++)
+                {
+                    Room room = new Room()
+                    {
+                        Name = floor.BuildingFloor.ToString() + r.ToString(),
+                        FloorId = floor.Id
+                    };
+                    
+                    rooms.Add(room);
+                    totalRooms--;
+                }
+                _roomsRepository.CreateRange(rooms);
+            }
         }
     }
 }

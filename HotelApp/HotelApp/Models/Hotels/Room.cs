@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace HotelApp.Models.Hotels
 {
-    public class Room : Entity
+    public class Room : NamedEntity
     {
         public int FloorId { get; set; }
         public Floor Floor { get; set; }
-        public bool Booked { get; set; }
-        public bool Cleaned { get; set; }
-        public bool ClosedForCustomers { get; set; }
-        public string ClosedReason { get; set; }
+        public bool Booked { get; set; } = false;
+        public bool Cleaned { get; set; } = true;
+        public bool ClosedForCustomers { get; set; } = true;
+        public string ClosedReason { get; set; } = "Ready to be opened. Need user confirmation.";
     }
 }

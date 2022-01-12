@@ -11,6 +11,10 @@
 		- if no cities has hotels.
 		- option to delete only cities without hotels.
 
+3. Update Hotel layout.
+	- To change number of rooms, floors and rooms per floor more complex functionality is needed. For now only possible way to change room count and reassign rooms is through database
+		directly.
+
 TODO - short term tasks:
 1. Update locations.
 	- Update country name.
