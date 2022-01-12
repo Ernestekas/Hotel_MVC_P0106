@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelApp.Dtos.Hotel
+namespace HotelApp.Models.Hotels
 {
-    public class CityJsonModel : NamedEntity
+    public class Floor : Entity
     {
-        public int CountryId { get; set; }
+        public List<Room> Rooms { get; set; }
     }
 }

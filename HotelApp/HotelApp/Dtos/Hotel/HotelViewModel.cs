@@ -20,5 +20,7 @@ namespace HotelApp.Dtos.Hotel
         public int TotalRooms { get; set; }
         public int SelectedCityId { get; set; }
         public List<City> AllCities { get; set; }
+        public int FloorsCount { get; set; }
+        public int RoomsPerFloor { get; set; }
     }
 }

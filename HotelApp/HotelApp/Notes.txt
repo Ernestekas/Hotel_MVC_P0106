@@ -18,3 +18,12 @@ TODO - short term tasks:
 	- Add new cities without possibility to update existing cities names.
 
 2. Hotel Page.
+	Structure
+		* Hotel has:
+			- Employees. (Cleaners for now)
+			- Address. (City, address)
+			- Total Rooms Capacity.
+			- Hotel layout:
+				- Floors.
+					- Each floor has List of rooms.
+					- Each floor has unique floorNumber. > ON CREATING - floors number, rooms per floor.

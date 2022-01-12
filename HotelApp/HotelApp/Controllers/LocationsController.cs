@@ -55,7 +55,5 @@ namespace HotelApp.Controllers
 
             return RedirectToAction(nameof(UpdateCountry), new {countryId = redirectId});
         }
-
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HotelApp.Dtos;
 using HotelApp.Dtos.Hotel;
 using HotelApp.Models;
+using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using HotelApp.Repositories;
 using HotelApp.Repositories.Locations;

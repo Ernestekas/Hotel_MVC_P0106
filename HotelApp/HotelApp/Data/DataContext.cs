@@ -1,4 +1,6 @@
 ﻿using HotelApp.Models;
+using HotelApp.Models.Employees;
+using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,6 +16,9 @@ namespace HotelApp.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Cleaner> Cleaners { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Floor> Floors { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +33,15 @@ namespace HotelApp.Data
 
             modelBuilder.Entity<City>().Property<bool>("IsDeleted");
             modelBuilder.Entity<City>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+
+            modelBuilder.Entity<Cleaner>().Property<bool>("IsDeleted");
+            modelBuilder.Entity<Cleaner>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+
+            modelBuilder.Entity<Room>().Property<bool>("IsDeleted");
+            modelBuilder.Entity<Room>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+
+            modelBuilder.Entity<Floor>().Property<bool>("IsDeleted");
+            modelBuilder.Entity<Floor>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
         }
 
         public override int SaveChanges()
