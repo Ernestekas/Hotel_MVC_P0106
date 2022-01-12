@@ -7,9 +7,11 @@
         <table class="table table-bordered">
             <tr class="table-primary">
                 <th>Name</th>
-                <th>City</th>
+                <th style="width: 20%">City</th>
                 <th>Address</th>
-                <th>Total rooms</th>
+                <th style="width: 11%">Total rooms</th>
+                <th style="width: 11%">Floors count</th>
+                <th style="width: 11%">Rooms/floor</th>
             </tr>
             <tr>
                 <td class="align-middle">@Html.TextBoxFor(m => m.Name, new{@class = "w-100"})</td>
@@ -19,7 +21,9 @@
                     , new { @class = "form-control", id="cities"})
                 </td>
                 <td class="align-middle">@Html.TextBoxFor(m => m.Address, new{@class = "w-100"})</td>
-                <td class="align-middle">@Html.TextBoxFor(m => m.TotalRooms, new {@type="number", min = "0", @class="w-100"})</td>
+                <td class="align-middle">@Html.TextBoxFor(m => m.TotalRooms, new {@type="number", min = "1", @class="w-100"})</td>
+                <td class="align-middle">@Html.TextBoxFor(m => m.FloorsCount, new {@type="number", min = "1", @class="w-100"})</td>
+                <td class="align-middle">@Html.TextBoxFor(m => m.RoomsPerFloor, new {@type="number", min = "1", @class="w-100"})</td>
             </tr>
         </table>
     </div>

@@ -40,8 +40,14 @@ namespace HotelApp.Controllers
         [HttpPost]
         public IActionResult Add(HotelViewModel viewModel)
         {
+            if(viewModel.TotalRooms > viewModel.FloorsCount * viewModel.RoomsPerFloor)
+            {
+                ModelState.AddModelError("TotalRooms", "This building can't fit this much rooms.");
+            }
+
             if (!ModelState.IsValid)
             {
+                viewModel.AllCities = _locationsService.GetAllCities();
                 return View(viewModel);
             }
 
@@ -58,8 +64,14 @@ namespace HotelApp.Controllers
         [HttpPost]
         public IActionResult Update(HotelViewModel viewModel)
         {
+            if (viewModel.TotalRooms > viewModel.FloorsCount * viewModel.RoomsPerFloor)
+            {
+                ModelState.AddModelError("TotalRooms", "This building can't fit this much rooms.");
+            }
+
             if (!ModelState.IsValid)
             {
+                viewModel.AllCities = _locationsService.GetAllCities();
                 return View(viewModel);
             }
 
