@@ -1,0 +1,28 @@
+﻿@model HotelApp.Dtos.Employees.AllEmployeesViewModel
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Hotel Name</th>
+            <th>Work address</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(int i = 0; i < Model.Cleaners.Count; i++)
+        {
+            <tr>
+                <td>@(i+1)</td>
+                <td>@Model.Cleaners[i].FirstName @Model.Cleaners[i].LastName</td>
+                <td>@Model.Cleaners[i].Hotel.Name</td>
+                <td>@Model.Cleaners[i].Hotel.Address, @Model.Cleaners[i].Hotel.City, @Model.Cleaners[i].Hotel.City.Country.Name</td>
+                <td>
+                    @Html.ActionLink("Update", "Update", "Employees", new { empId = Model.Cleaners[i].Id }) |
+                    @Html.ActionLink("Delete", "Delete", "Employees", new { empId = Model.Cleaners[i].Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

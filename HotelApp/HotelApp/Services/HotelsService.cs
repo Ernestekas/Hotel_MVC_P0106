@@ -1,5 +1,5 @@
 ﻿using HotelApp.Dtos;
-using HotelApp.Dtos.Hotel;
+using HotelApp.Dtos.Hotels;
 using HotelApp.Models;
 using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
@@ -91,9 +91,18 @@ namespace HotelApp.Services
             _hotelsRepository.Update(hotel);
         }
 
-        public void Remove(int hotelId)
+        public bool Remove(int hotelId)
         {
-            _hotelsRepository.Remove(hotelId);
+            bool result = false;
+            Hotel selected = _hotelsRepository.GetHotelWithEmployess(hotelId);
+
+            if (selected.Cleaners.Any())
+            {
+                _hotelsRepository.Remove(hotelId);
+                result = true;
+            }
+            
+            return result;
         }
 
         private List<Floor> CreateFloors(int totalFloors, int hotelId)

@@ -15,6 +15,7 @@
 	- To change number of rooms, floors and rooms per floor more complex functionality is needed. For now only possible way to change room count and reassign rooms is through database
 		directly.
 
+
 TODO - short term tasks:
 1. Update locations.
 	- Update country name.
@@ -31,3 +32,6 @@ TODO - short term tasks:
 				- Floors.
 					- Each floor has List of rooms.
 					- Each floor has unique floorNumber. > ON CREATING - floors number, rooms per floor.
+
+3. Display all hotels.
+	- If user tries to delete hotel when there are employees working don't remove hotel (implemented) write message on to and color hotel background in some color.

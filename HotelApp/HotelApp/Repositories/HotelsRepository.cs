@@ -18,5 +18,10 @@ namespace HotelApp.Repositories
         {
             return _context.Hotels.Include(h => h.Floors).ThenInclude(f => f.Rooms).Where(h => h.Id == id).FirstOrDefault();
         }
+
+        public Hotel GetHotelWithEmployess(int hotelId)
+        {
+            return _context.Hotels.Include(x => x.Cleaners).FirstOrDefault(h => h.Id == hotelId);
+        }
     }
 }

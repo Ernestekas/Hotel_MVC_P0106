@@ -17,6 +17,6 @@ namespace HotelApp.Models.Hotels
         public string Address { get; set; }
         public int TotalRooms { get; set; }
         public List<Floor> Floors { get; set; }
-        public List<Cleaner> MyProperty { get; set; }
+        public List<Cleaner> Cleaners { get; set; }
     }
 }

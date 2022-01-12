@@ -1,4 +1,4 @@
-﻿using HotelApp.Dtos.Hotel;
+﻿using HotelApp.Dtos.Hotels;
 using HotelApp.Dtos.Location;
 using HotelApp.Models.Location;
 using HotelApp.Repositories.Locations;

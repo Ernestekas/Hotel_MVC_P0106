@@ -21,4 +21,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Employees\All.cshtml" />
+  </ItemGroup>
+
 </Project>

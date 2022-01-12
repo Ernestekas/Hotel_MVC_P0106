@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelApp.Dtos.Hotel
+namespace HotelApp.Dtos.Hotels
 {
     public class HotelViewModel
     {

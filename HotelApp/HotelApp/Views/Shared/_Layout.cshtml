@@ -26,12 +26,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Hotels" asp-action="Add">Add Hotel</a>
                         </div>
                     </div>
-                    <div class="dropdown">
+                    <div class="dropdown mr-2">
                         <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Locations
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Locations" asp-action="Manage">Manager</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Employees
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="All">All employees</a>
                         </div>
                     </div>
                 </div>

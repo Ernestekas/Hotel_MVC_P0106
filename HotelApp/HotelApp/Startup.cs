@@ -1,5 +1,6 @@
 using HotelApp.Data;
 using HotelApp.Repositories;
+using HotelApp.Repositories.Employees;
 using HotelApp.Repositories.Hotels;
 using HotelApp.Repositories.Locations;
 using HotelApp.Services;
@@ -41,6 +42,8 @@ namespace HotelApp
             services.AddTransient<CountriesRepository>();
             services.AddTransient<CitiesRepository>();
 
+            services.AddTransient<EmployeesService>();
+            services.AddTransient<EmployeesRepository>();
 
             services.AddControllersWithViews();
         }

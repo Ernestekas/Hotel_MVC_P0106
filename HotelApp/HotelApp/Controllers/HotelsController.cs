@@ -1,5 +1,5 @@
 ﻿using HotelApp.Dtos;
-using HotelApp.Dtos.Hotel;
+using HotelApp.Dtos.Hotels;
 using HotelApp.Repositories;
 using HotelApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +21,10 @@ namespace HotelApp.Controllers
             _locationsService = locationsService;
         }
 
-        public IActionResult All()
+        public IActionResult All(string errorMessage = "")
         {
             DisplayHotels viewModel = _hotelsService.GetAll();
+            ViewBag.ErrorMessage = errorMessage;
             return View(viewModel);
         }
 
@@ -81,7 +82,12 @@ namespace HotelApp.Controllers
 
         public IActionResult Delete(int hotelId)
         {
-            _hotelsService.Remove(hotelId);
+            bool result = _hotelsService.Remove(hotelId);
+            if (!result)
+            {
+                string message = "Hotel not removed. There is still employees assigned to this hotel.";
+                return RedirectToAction(nameof(All), message);
+            }
             return RedirectToAction(nameof(All));
         }
 
