@@ -93,7 +93,8 @@ namespace HotelApp.Controllers
 
         public IActionResult HotelManager(int hotelId)
         {
-            return View(hotelId);
+            HotelManagerViewModel viewModel = _hotelsService.GetHotelData(hotelId);
+            return View(viewModel);
         }
     }
 }

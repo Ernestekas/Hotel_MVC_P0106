@@ -49,7 +49,6 @@ namespace HotelApp.Controllers
         public IActionResult Delete(int empId)
         {
             _employeesService.Delete(empId);
-
             return RedirectToAction(nameof(All));
         }
     }

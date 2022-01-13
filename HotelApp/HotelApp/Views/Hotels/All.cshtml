@@ -16,7 +16,7 @@
     {
         <tr>
             <td scope="row">@(i + 1)</td>
-            <td>@Html.ActionLink(@Model.HotelsNames[i], "Hotel", "Hotels", new { hotelId = Model.HotelsIds[i] })</td>
+            <td>@Html.ActionLink(@Model.HotelsNames[i], "HotelManager", "Hotels", new { hotelId = Model.HotelsIds[i] })</td>
             <td>
                 @Html.ActionLink("Update", "Update", "Hotels", new { hotelId = Model.HotelsIds[i] }) |
                 @Html.ActionLink("Delete", "Delete", "Hotels", new { hotelId = Model.HotelsIds[i] })

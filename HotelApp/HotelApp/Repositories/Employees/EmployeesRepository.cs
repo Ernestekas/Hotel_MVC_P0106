@@ -21,5 +21,10 @@ namespace HotelApp.Repositories.Employees
                     .ThenInclude(ci => ci.Country)
                     .ToList();
         }
+
+        public List<Cleaner> GetCleanersByHotel(int hotelId)
+        {
+            return _context.Cleaners.Where(c => c.HotelId == hotelId).ToList();
+        }
     }
 }

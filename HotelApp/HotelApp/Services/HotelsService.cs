@@ -4,6 +4,7 @@ using HotelApp.Models;
 using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using HotelApp.Repositories;
+using HotelApp.Repositories.Employees;
 using HotelApp.Repositories.Hotels;
 using HotelApp.Repositories.Locations;
 using System;
@@ -20,13 +21,20 @@ namespace HotelApp.Services
         private CitiesRepository _citiesRepository;
         private FloorsRepository _floorsRepository;
         private RoomsRepository _roomsRepository;
+        private EmployeesRepository _employeesRepository;
 
-        public HotelsService(HotelsRepository hotelsRepository, CitiesRepository citiesRepository, FloorsRepository floorRepository, RoomsRepository roomsRepository)
+        public HotelsService(
+            HotelsRepository hotelsRepository, 
+            CitiesRepository citiesRepository, 
+            FloorsRepository floorsRepository, 
+            RoomsRepository roomsRepository, 
+            EmployeesRepository employeesRepository)
         {
             _hotelsRepository = hotelsRepository;
             _citiesRepository = citiesRepository;
-            _floorsRepository = floorRepository;
+            _floorsRepository = floorsRepository;
             _roomsRepository = roomsRepository;
+            _employeesRepository = employeesRepository;
         }
 
         public DisplayHotels GetAll()
@@ -103,6 +111,41 @@ namespace HotelApp.Services
             }
             
             return result;
+        }
+
+        public HotelManagerViewModel GetHotelData(int hotelId)
+        {
+            Hotel hotel = _hotelsRepository.GetById(hotelId);
+            hotel.City = _hotelsRepository.GetHotelLocation(hotelId);
+            List<Room> hotelRooms = _hotelsRepository.GetHotelRooms(hotelId);
+
+            HotelManagerViewModel viewModel = new HotelManagerViewModel()
+            {
+                HotelId = hotel.Id,
+                HotelName = hotel.Name,
+                HotelAddress = $"{hotel.Address}, {hotel.City.Name}, {hotel.City.Country.Name}.",
+                Cleaners = _employeesRepository.GetCleanersByHotel(hotelId)
+            };
+
+            foreach(var room in hotelRooms)
+            {
+                if (room.ClosedForCustomers)
+                {
+                    viewModel.RoomsClosedForOtherReasons.Add(room);
+                }
+                else if (room.Cleaned)
+                {
+                    viewModel.ReadyRooms.Add(room);
+                }
+                else
+                {
+                    viewModel.RoomsNeedsCleaning.Add(room);
+                }
+            }
+
+            
+
+            return viewModel;
         }
 
         private List<Floor> CreateFloors(int totalFloors, int hotelId)

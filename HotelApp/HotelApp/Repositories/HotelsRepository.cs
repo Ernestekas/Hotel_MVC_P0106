@@ -1,6 +1,7 @@
 ﻿using HotelApp.Data;
 using HotelApp.Models;
 using HotelApp.Models.Hotels;
+using HotelApp.Models.Location;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,27 @@ namespace HotelApp.Repositories
     {
         public HotelsRepository(DataContext context) : base(context) { }
 
-        public Hotel GetByIdIncludeFloors(int id)
+        public Hotel GetByIdIncludeFloors(int hotelId)
         {
-            return _context.Hotels.Include(h => h.Floors).ThenInclude(f => f.Rooms).Where(h => h.Id == id).FirstOrDefault();
+            return _context.Hotels.Include(h => h.Floors).ThenInclude(f => f.Rooms).Where(h => h.Id == hotelId).FirstOrDefault();
         }
 
         public Hotel GetHotelWithEmployess(int hotelId)
         {
             return _context.Hotels.Include(x => x.Cleaners).FirstOrDefault(h => h.Id == hotelId);
+        }
+
+        public City GetHotelLocation(int hotelId)
+        {
+            Hotel hotel = _context.Hotels.Include(h => h.City).ThenInclude(ci => ci.Country).FirstOrDefault(h => h.Id == hotelId);
+            City result = hotel.City;
+
+            return result;
+        }
+
+        public List<Room> GetHotelRooms(int hotelId)
+        {
+            return GetByIdIncludeFloors(hotelId).Floors.SelectMany(f => f.Rooms).ToList();
         }
 
         public List<Hotel> GetAllWithLocations()
