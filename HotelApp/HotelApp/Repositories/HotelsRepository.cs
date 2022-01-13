@@ -23,5 +23,10 @@ namespace HotelApp.Repositories
         {
             return _context.Hotels.Include(x => x.Cleaners).FirstOrDefault(h => h.Id == hotelId);
         }
+
+        public List<Hotel> GetAllWithLocations()
+        {
+            return _context.Hotels.Include(x => x.City).ThenInclude(x => x.Country).ToList();
+        }
     }
 }

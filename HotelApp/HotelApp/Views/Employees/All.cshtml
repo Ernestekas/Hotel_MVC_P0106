@@ -17,7 +17,7 @@
                 <td>@(i+1)</td>
                 <td>@Model.Cleaners[i].FirstName @Model.Cleaners[i].LastName</td>
                 <td>@Model.Cleaners[i].Hotel.Name</td>
-                <td>@Model.Cleaners[i].Hotel.Address, @Model.Cleaners[i].Hotel.City, @Model.Cleaners[i].Hotel.City.Country.Name</td>
+                <td>@Model.Cleaners[i].Hotel.Address, @Model.Cleaners[i].Hotel.City.Name, @Model.Cleaners[i].Hotel.City.Country.Name</td>
                 <td>
                     @Html.ActionLink("Update", "Update", "Employees", new { empId = Model.Cleaners[i].Id }) |
                     @Html.ActionLink("Delete", "Delete", "Employees", new { empId = Model.Cleaners[i].Id })

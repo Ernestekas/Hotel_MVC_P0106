@@ -1,0 +1,24 @@
+﻿@model HotelApp.Dtos.Employees.CleanerViewModel
+
+@using (Html.BeginForm("Update", "Employees", FormMethod.Post)){
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Workplace</th>
+            </tr>
+            <tr>
+                <th>@Html.TextBoxFor(m => m.FirstName)</th>
+                <th>@Html.TextBoxFor(m => m.LastName)</th>
+                <th>
+                    @Html.DropDownListFor(m => m.SelectedHotelId
+                                    , new SelectList(@Model.AllHotels, "Id", "Name")
+                                    , new { @class = "form-control w-100"})
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <input type="submit" class="btn btn-primary" value="Submit" />
+    @Html.HiddenFor(m => m.Id)
+}
