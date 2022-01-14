@@ -1,7 +1,5 @@
 ﻿using HotelApp.Dtos;
 using HotelApp.Dtos.Hotels;
-using HotelApp.Models;
-using HotelApp.Models.Custormers;
 using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using HotelApp.Repositories;
@@ -9,11 +7,8 @@ using HotelApp.Repositories.Customers;
 using HotelApp.Repositories.Employees;
 using HotelApp.Repositories.Hotels;
 using HotelApp.Repositories.Locations;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelApp.Services
 {

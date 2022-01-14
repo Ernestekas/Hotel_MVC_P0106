@@ -3,11 +3,7 @@ using HotelApp.Models.Employees;
 using HotelApp.Models.Hotels;
 using HotelApp.Repositories;
 using HotelApp.Repositories.Employees;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelApp.Services
 {

@@ -3,11 +3,6 @@ using HotelApp.Models.Custormers;
 using HotelApp.Models.Hotels;
 using HotelApp.Repositories.Customers;
 using HotelApp.Repositories.Hotels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelApp.Services
 {

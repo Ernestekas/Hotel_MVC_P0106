@@ -1,14 +1,8 @@
-﻿using HotelApp.Dtos.Hotels;
-using HotelApp.Dtos.Location;
+﻿using HotelApp.Dtos.Location;
 using HotelApp.Models.Location;
 using HotelApp.Repositories.Locations;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelApp.Services
 {

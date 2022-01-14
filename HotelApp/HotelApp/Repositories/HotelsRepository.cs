@@ -1,13 +1,9 @@
 ﻿using HotelApp.Data;
-using HotelApp.Models;
 using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelApp.Repositories
 {

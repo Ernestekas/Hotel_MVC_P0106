@@ -1,12 +1,7 @@
 ﻿using HotelApp.Models.Employees;
 using HotelApp.Models.Generic;
 using HotelApp.Models.Location;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelApp.Models.Hotels
 {
