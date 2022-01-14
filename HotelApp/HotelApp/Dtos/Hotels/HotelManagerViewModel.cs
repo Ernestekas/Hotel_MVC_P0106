@@ -16,6 +16,7 @@ namespace HotelApp.Dtos.Hotels
         public List<Room> ReadyRooms { get; set; } = new List<Room>();
         public List<Room> RoomsNeedsCleaning { get; set; } = new List<Room>();
         public List<Room> RoomsClosedForOtherReasons { get; set; } = new List<Room>();
+        public List<Room> RoomsBooked { get; set; } = new List<Room>();
         public List<Cleaner> Cleaners { get; set; } = new List<Cleaner>();
     }
 }

@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <None Include="Views\Employees\All.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Employees\All.cshtml" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

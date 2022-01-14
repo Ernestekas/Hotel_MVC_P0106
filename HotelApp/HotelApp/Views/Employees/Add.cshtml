@@ -9,12 +9,12 @@
                 <th>Workplace</th>
             </tr>
             <tr>
-                <th>@Html.TextBoxFor(m => m.FirstName)</th>
-                <th>@Html.TextBoxFor(m => m.LastName)</th>
+                <th>@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control w-100"})</th>
+                <th>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control w-100"})</th>
                 <th>
                     @Html.DropDownListFor(m => m.SelectedHotelId
                                     , new SelectList(@Model.AllHotels, "Id", "Name")
-                                    , new { @class = "form-control w-50"})
+                                    , new { @class = "form-control w-100"})
                 </th>
             </tr>
         </thead>

@@ -90,11 +90,5 @@ namespace HotelApp.Controllers
             }
             return RedirectToAction(nameof(All));
         }
-
-        public IActionResult HotelManager(int hotelId)
-        {
-            HotelManagerViewModel viewModel = _hotelsService.GetHotelData(hotelId);
-            return View(viewModel);
-        }
     }
 }

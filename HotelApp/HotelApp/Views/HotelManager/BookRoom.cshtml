@@ -1,0 +1,25 @@
+﻿@model HotelApp.Dtos.Hotels.BookRoomViewModel
+
+@using (Html.BeginForm("BookRoom", "HotelManager", FormMethod.Post)){
+    <table>
+        <thead>
+            <tr>
+                <th>Room #</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Customer requests</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.RoomName</td>
+                <td>@Html.TextBoxFor(m => m.CustomerFirstName)</td>
+                <td>@Html.TextBoxFor(m => m.CustomerLastName)</td>
+                <td>@Html.TextBoxFor(m => m.CustomerRequests)</td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.HiddenFor(m => m.HotelId)
+    @Html.HiddenFor(m => m.RoomId)
+    <input type="submit" value="Submit" class="btn btn-primary" />
+}

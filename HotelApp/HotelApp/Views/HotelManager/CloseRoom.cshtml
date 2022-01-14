@@ -1,0 +1,23 @@
+﻿@model HotelApp.Dtos.Hotels.CloseRoomViewModel
+
+@using (Html.BeginForm("CloseRoom", "HotelManager", FormMethod.Post)){
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th style="width: 10%">Room</th>
+                <th>Hotel</th>
+                <th>Closing reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.RoomName</td>
+                <td>@Model.HotelName</td>
+                <td>@Html.TextBoxFor(m => m.CloseReason, new{@class="w-100"})</td>
+            </tr>
+        </tbody>
+    </table>
+    <input class="btn btn-primary" type="submit" value="Submit" />
+    @Html.HiddenFor(m => m.RoomId)
+    @Html.HiddenFor(m => m.HotelId)
+}

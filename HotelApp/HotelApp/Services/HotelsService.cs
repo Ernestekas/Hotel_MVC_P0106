@@ -133,6 +133,10 @@ namespace HotelApp.Services
                 {
                     viewModel.RoomsClosedForOtherReasons.Add(room);
                 }
+                else if (room.Booked)
+                {
+                    viewModel.RoomsBooked.Add(room);
+                }
                 else if (room.Cleaned)
                 {
                     viewModel.ReadyRooms.Add(room);
@@ -142,8 +146,6 @@ namespace HotelApp.Services
                     viewModel.RoomsNeedsCleaning.Add(room);
                 }
             }
-
-            
 
             return viewModel;
         }

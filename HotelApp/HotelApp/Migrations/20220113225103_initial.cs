@@ -2,7 +2,7 @@
 
 namespace HotelApp.Migrations
 {
-    public partial class remodelingdatabase : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,22 @@ namespace HotelApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Requests = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,6 +108,7 @@ namespace HotelApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BuildingFloor = table.Column<int>(type: "int", nullable: false),
                     HotelId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -113,15 +130,24 @@ namespace HotelApp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FloorId = table.Column<int>(type: "int", nullable: false),
+                    CleanerId = table.Column<int>(type: "int", nullable: true),
                     Booked = table.Column<bool>(type: "bit", nullable: false),
+                    CleanerAssigned = table.Column<bool>(type: "bit", nullable: false),
                     Cleaned = table.Column<bool>(type: "bit", nullable: false),
                     ClosedForCustomers = table.Column<bool>(type: "bit", nullable: false),
                     ClosedReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rooms_Cleaners_CleanerId",
+                        column: x => x.CleanerId,
+                        principalTable: "Cleaners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Rooms_Floors_FloorId",
                         column: x => x.FloorId,
@@ -151,6 +177,11 @@ namespace HotelApp.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rooms_CleanerId",
+                table: "Rooms",
+                column: "CleanerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_FloorId",
                 table: "Rooms",
                 column: "FloorId");
@@ -159,10 +190,13 @@ namespace HotelApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cleaners");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
+
+            migrationBuilder.DropTable(
+                name: "Cleaners");
 
             migrationBuilder.DropTable(
                 name: "Floors");
