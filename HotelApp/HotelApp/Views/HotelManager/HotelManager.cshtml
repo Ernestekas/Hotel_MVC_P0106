@@ -15,8 +15,8 @@
             <th colspan=3 style="text-align: center">Rooms for booking</th>
         </tr>
         <tr>
-            <th>#</th>
-            <th>Rooms</th>
+            <th style="width: 7%">#</th>
+            <th style="width: 20%">Rooms</th>
             <th></th>
         </tr>
     </thead>
@@ -25,7 +25,7 @@
         {
             <tr>
                 <th>@(i + 1)</th>
-                <td>@Model.ReadyRooms[i].Name</td>
+                <td>Room #@Model.ReadyRooms[i].Name</td>
                 <td style="text-align: right">
                     @Html.ActionLink("Book", "BookRoom","HotelManager", new{roomId = @Model.ReadyRooms[i].Id}, new {@class="btn btn-success"})
                     @Html.ActionLink("Close", "CloseRoom", "HotelManager", new{roomId = @Model.ReadyRooms[i].Id}, new {@class="btn btn-warning"})
@@ -41,8 +41,8 @@
             <th colspan=4 style="text-align: center">Booked Rooms</th>
         </tr>
         <tr>
-            <th>#</th>
-            <th>Rooms</th>
+            <th style="width: 7%">#</th>
+            <th style="width: 20%">Rooms</th>
             <th></th>
         </tr>
     </thead>
@@ -51,7 +51,7 @@
         {
             <tr>
                 <th>@(i + 1)</th>
-                <td>@Model.RoomsBooked[i].Name</td>
+                <td>Room #@Model.RoomsBooked[i].Name</td>
                 <td style="text-align: right">
                     @Html.ActionLink("Free the room", "FreeTheRoom", "HotelManager", new{roomId = Model.RoomsBooked[i].Id}, new{@class="btn btn-danger"})
                 </td>
@@ -66,10 +66,10 @@
             <th colspan=4 style="text-align: center">Needs Cleaning</th>
         </tr>
         <tr>
-            <th>#</th>
-            <th>Rooms</th>
+            <th style="width: 7%">#</th>
+            <th style="width: 20%">Rooms</th>
             <th>Cleaner</th>
-            <th></th>
+            <th style="text-align: right">Cleaners available: @Model.AvailableCleaners.Count()</th>
         </tr>
     </thead>
     <tbody>
@@ -77,10 +77,36 @@
         {
             <tr>
                 <th>@(i + 1)</th>
-                <td>@Model.RoomsNeedsCleaning[i].Name</td>
-                <td><i>--- Cleaner ---</i></td>
+                <td>Room #@Model.RoomsNeedsCleaning[i].Name</td>
+                <td>
+                    @if(@Model.RoomsNeedsCleaning[i].Cleaner != null)
+                    {
+                        @(Model.RoomsNeedsCleaning[i].Cleaner.FirstName + " " + Model.RoomsNeedsCleaning[i].Cleaner.LastName)
+                    }
+                    else
+                    {
+                        <i>N/A</i>
+                    }
+                </td>
                 <td style="text-align: right">
-                    @Html.ActionLink("Assign Cleaner", "AssignCleaner", "HotelManager", new{hotelId = @Model.HotelId}, new{@class="btn btn-warning"})
+                @if (!Model.RoomsNeedsCleaning[i].CleanerAssigned)
+                {
+                    @if(Model.AvailableCleaners.Count > 0)
+                    {
+                        @Html.ActionLink("Assign Cleaner", "AssignCleaner", "HotelManager", new{roomId = @Model.RoomsNeedsCleaning[i].Id}, new{@class="btn btn-warning"})
+                    }
+                    else
+                    {
+                        <input type="button" value="Assign cleaner" class="btn btn-warning" disabled="disabled" />
+                    }
+                    <input type="button" value="Room is cleaned" class="btn btn-success" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="button" value="Assign cleaner" class="btn btn-warning" disabled="disabled" />
+                    @Html.ActionLink("Room is cleaned", "MarkCleaned", "HotelManager", new{roomId = @Model.RoomsNeedsCleaning[i].Id}, new{@class="btn btn-success"})
+                }
+                @Html.ActionLink("Close", "CloseRoom", "HotelManager", new{roomId = @Model.RoomsNeedsCleaning[i].Id}, new {@class="btn btn-warning"})
                 </td>
             </tr>
         }
@@ -93,8 +119,8 @@
             <th colspan=4 style="text-align: center">Closed Rooms</th>
         </tr>
         <tr>
-            <th>#</th>
-            <th>Rooms</th>
+            <th style="width: 7%">#</th>
+            <th style="width: 20%">Rooms</th>
             <th>Reason</th>
             <th></th>
         </tr>
@@ -104,7 +130,7 @@
         {
             <tr>
                 <th>@(i + 1)</th>
-                <td>@Model.RoomsClosedForOtherReasons[i].Name</td>
+                <td>Room #@Model.RoomsClosedForOtherReasons[i].Name</td>
                 <td>@Model.RoomsClosedForOtherReasons[i].ClosedReason</td>
                 <td style="text-align: right">
                     @Html.ActionLink("Open", "OpenRoom", "HotelManager", new{roomId = Model.RoomsClosedForOtherReasons[i].Id}, new {@class="btn btn-outline-dark"})

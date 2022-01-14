@@ -24,7 +24,7 @@ namespace HotelApp.Repositories.Employees
 
         public List<Cleaner> GetCleanersByHotel(int hotelId)
         {
-            return _context.Cleaners.Where(c => c.HotelId == hotelId).ToList();
+            return _context.Cleaners.Include(c => c.RoomsAssigned).Where(c => c.HotelId == hotelId).ToList();
         }
     }
 }

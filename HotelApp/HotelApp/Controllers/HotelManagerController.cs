@@ -77,5 +77,25 @@ namespace HotelApp.Controllers
 
             return View("HotelManager", vm);
         }
+
+        public IActionResult AssignCleaner(int roomId)
+        {
+            int hotelId = _roomsService.AssignCleaner(roomId);
+            HotelManagerViewModel vm = _hotelsService.GetHotelData(hotelId);
+
+            ViewBag.moveToLocation = "CleanIt";
+
+            return View("HotelManager", vm);
+        }
+
+        public IActionResult MarkCleaned(int roomId)
+        {
+            int hotelId = _roomsService.MarkCleaned(roomId);
+            HotelManagerViewModel vm = _hotelsService.GetHotelData(hotelId);
+
+            ViewBag.moveToLocation = "CleanIt";
+
+            return View("HotelManager", vm);
+        }
     }
 }

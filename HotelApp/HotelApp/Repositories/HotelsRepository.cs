@@ -17,7 +17,7 @@ namespace HotelApp.Repositories
 
         public Hotel GetByIdIncludeFloors(int hotelId)
         {
-            return _context.Hotels.Include(h => h.Floors).ThenInclude(f => f.Rooms).Where(h => h.Id == hotelId).FirstOrDefault();
+            return _context.Hotels.Include(h => h.Floors).ThenInclude(f => f.Rooms).ThenInclude(r => r.Cleaner).Where(h => h.Id == hotelId).FirstOrDefault();
         }
 
         public Hotel GetHotelWithEmployess(int hotelId)

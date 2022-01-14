@@ -117,7 +117,7 @@ namespace HotelApp.Services
         {
             Hotel hotel = _hotelsRepository.GetById(hotelId);
             hotel.City = _hotelsRepository.GetHotelLocation(hotelId);
-            List<Room> hotelRooms = _hotelsRepository.GetHotelRooms(hotelId);
+            List<Room> hotelRooms = _hotelsRepository.GetHotelRooms(hotelId).OrderBy(r => r.Id).ToList();
 
             HotelManagerViewModel viewModel = new HotelManagerViewModel()
             {
@@ -126,6 +126,8 @@ namespace HotelApp.Services
                 HotelAddress = $"{hotel.Address}, {hotel.City.Name}, {hotel.City.Country.Name}.",
                 Cleaners = _employeesRepository.GetCleanersByHotel(hotelId)
             };
+
+            viewModel.AvailableCleaners = viewModel.Cleaners.Where(c => c.RoomsAssigned.Count() < 5).ToList();
 
             foreach(var room in hotelRooms)
             {
@@ -187,5 +189,7 @@ namespace HotelApp.Services
                 _roomsRepository.CreateRange(rooms);
             }
         }
+
+        
     }
 }
