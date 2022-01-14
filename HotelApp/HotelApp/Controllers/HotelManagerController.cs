@@ -54,12 +54,18 @@ namespace HotelApp.Controllers
         public IActionResult BookRoom(int roomId)
         {
             BookRoomViewModel viewModel = _customersService.GetBookRoomModel(roomId);
+
             return View(viewModel);
         }
 
         [HttpPost]
         public IActionResult BookRoom(BookRoomViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             _customersService.BookRoom(viewModel);
             HotelManagerViewModel vm = _hotelsService.GetHotelData(viewModel.HotelId);
 

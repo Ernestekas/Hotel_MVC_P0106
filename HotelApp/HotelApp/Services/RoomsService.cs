@@ -8,6 +8,7 @@ using HotelApp.Repositories.Employees;
 using HotelApp.Repositories.Hotels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HotelApp.Services
 {
@@ -85,7 +86,7 @@ namespace HotelApp.Services
 
             int hotelId = _roomsRepository.GetHotelByRoomId(roomId);
             Room room = _roomsRepository.GetById(roomId);
-            List<Cleaner> cleaners = _employeesRepository.GetCleanersByHotel(hotelId);
+            List<Cleaner> cleaners = _employeesRepository.GetCleanersByHotel(hotelId).Where(c => c.RoomsAssigned.Count() < 5).ToList();
 
             room.CleanerId = cleaners[random.Next(cleaners.Count)].Id;
             room.CleanerAssigned = true;

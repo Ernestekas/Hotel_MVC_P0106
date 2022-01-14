@@ -21,5 +21,7 @@
     </table>
     @Html.HiddenFor(m => m.HotelId)
     @Html.HiddenFor(m => m.RoomId)
+    @Html.HiddenFor(m => m.RoomName)
     <input type="submit" value="Submit" class="btn btn-primary" />
+    @Html.ValidationSummary()
 }

@@ -73,7 +73,7 @@ namespace HotelApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Hotels}/{action=All}/{id?}");
             });
         }
     }
