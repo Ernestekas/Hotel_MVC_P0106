@@ -1,9 +1,11 @@
 ﻿using HotelApp.Dtos;
 using HotelApp.Dtos.Hotels;
 using HotelApp.Models;
+using HotelApp.Models.Custormers;
 using HotelApp.Models.Hotels;
 using HotelApp.Models.Location;
 using HotelApp.Repositories;
+using HotelApp.Repositories.Customers;
 using HotelApp.Repositories.Employees;
 using HotelApp.Repositories.Hotels;
 using HotelApp.Repositories.Locations;
@@ -22,19 +24,22 @@ namespace HotelApp.Services
         private FloorsRepository _floorsRepository;
         private RoomsRepository _roomsRepository;
         private EmployeesRepository _employeesRepository;
+        private CustomersRepository _customersRepository;
 
         public HotelsService(
             HotelsRepository hotelsRepository, 
             CitiesRepository citiesRepository, 
             FloorsRepository floorsRepository, 
             RoomsRepository roomsRepository, 
-            EmployeesRepository employeesRepository)
+            EmployeesRepository employeesRepository, 
+            CustomersRepository customersRepository)
         {
             _hotelsRepository = hotelsRepository;
             _citiesRepository = citiesRepository;
             _floorsRepository = floorsRepository;
             _roomsRepository = roomsRepository;
             _employeesRepository = employeesRepository;
+            _customersRepository = customersRepository;
         }
 
         public DisplayHotels GetAll()
@@ -119,6 +124,11 @@ namespace HotelApp.Services
             hotel.City = _hotelsRepository.GetHotelLocation(hotelId);
             List<Room> hotelRooms = _hotelsRepository.GetHotelRooms(hotelId).OrderBy(r => r.Id).ToList();
 
+            foreach(Room room in hotelRooms)
+            {
+                room.Customer = _customersRepository.GetAll().FirstOrDefault(c => c.Id == room.CustomerId);
+            }
+
             HotelManagerViewModel viewModel = new HotelManagerViewModel()
             {
                 HotelId = hotel.Id,
@@ -126,6 +136,7 @@ namespace HotelApp.Services
                 HotelAddress = $"{hotel.Address}, {hotel.City.Name}, {hotel.City.Country.Name}.",
                 Cleaners = _employeesRepository.GetCleanersByHotel(hotelId)
             };
+
 
             viewModel.AvailableCleaners = viewModel.Cleaners.Where(c => c.RoomsAssigned.Count() < 5).ToList();
 
@@ -189,7 +200,5 @@ namespace HotelApp.Services
                 _roomsRepository.CreateRange(rooms);
             }
         }
-
-        
     }
 }
